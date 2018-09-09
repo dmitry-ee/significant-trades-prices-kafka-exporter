@@ -5,6 +5,8 @@ from .log import LOGGER
 if not SETTINGS["stpke_mongo_url"]:
     raise Exception("Mongo Url is not defined! App will exit...")
 
+sc = SETTINGS["stpke_settings_collection"]
+
 def init_base_settings():
     LOGGER.warning("db SETTINGS is empty, going to init...")
     default_settings = [
@@ -16,15 +18,15 @@ def init_base_settings():
         { "name": "base_currencies", "value": ["USD", "BTC", "ETH"] },
     ]
     for setting in default_settings:
-        m.append("settings", { "_id": setting["name"], "value": setting["value"] })
+        m.append(sk, { "_id": setting["name"], "value": setting["value"] })
 
 m = MongoClient(SETTINGS["stpke_mongo_url"], SETTINGS["stpke_default_db"])
-currencies      = m.find_one("settings", { "_id":"currencies" })
-base_currencies = m.find_one("settings", { "_id":"base_currencies" })
+currencies      = m.find_one(sk, { "_id":"currencies" })
+base_currencies = m.find_one(sk, { "_id":"base_currencies" })
 if not currencies or not base_currencies:
     init_base_settings()
-    currencies      = m.find_one("settings", { "_id":"currencies" })
-    base_currencies = m.find_one("settings", { "_id":"base_currencies" })
+    currencies      = m.find_one(sk, { "_id":"currencies" })
+    base_currencies = m.find_one(sk, { "_id":"base_currencies" })
 
 CURRENCIES = currencies["value"]
 BASE_CURRENCIES = base_currencies["value"]
