@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  stpke:
+    image: ${DOCKER_ID_USER}/${APP_NAME}:${APP_VERSION}
+    build:
+      context: .
+    container_name: ${APP_NAME}
+    network_mode: "host"
