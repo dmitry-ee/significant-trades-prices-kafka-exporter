@@ -22,7 +22,7 @@ class PriceLoader(Callback):
             for pair, exchange in self._settings()["default_pairs"].items():
                 tick[pair] = await self._get_tick_from_exchange(exchange, pair, self._settings()["timeout_between_request_s"])
                 tick, _ = self._fix_missing_pairs(tick)
-            self.logger.info("got base tick = %s, going" % tick)
+            self.logger.info("got base tick = %s, going" % self._cleanup_tick(tick))
 
             for curr in self.currencies:
                 pair = "%s/BTC" % curr
