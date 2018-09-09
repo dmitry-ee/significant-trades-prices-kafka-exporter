@@ -40,6 +40,7 @@ class PriceLoader(Callback):
             await asyncio.sleep(self.sleep_time)
 
     def _cleanup_tick(self, tick):
+        tick = tick.copy()
         for p in list(tick.keys()):
             sp = p.split("/")
             # NOTE: cleanup all sh*t like BTC/BTC, XLM/XRP, USD/XML
