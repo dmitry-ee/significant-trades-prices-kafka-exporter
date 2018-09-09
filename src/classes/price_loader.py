@@ -33,8 +33,10 @@ class PriceLoader(Callback):
             # second time for cross-exchange pairs
             tick, _ = self._fix_missing_pairs(tick)
 
+            tick = self._cleanup_tick(tick)
+
             self.logger.info("got full tick = %s, going for sleep for %s sec" % (tick, self.sleep_time))
-            await self.sendCallback(self._cleanup_tick(tick))
+            await self.sendCallback(tick)
             await asyncio.sleep(self.sleep_time)
 
     def _cleanup_tick(self, tick):
