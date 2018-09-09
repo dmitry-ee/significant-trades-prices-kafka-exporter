@@ -18,15 +18,15 @@ def init_base_settings():
         { "name": "base_currencies", "value": ["USD", "BTC", "ETH"] },
     ]
     for setting in default_settings:
-        m.append(sk, { "_id": setting["name"], "value": setting["value"] })
+        m.append(sc, { "_id": setting["name"], "value": setting["value"] })
 
 m = MongoClient(SETTINGS["stpke_mongo_url"], SETTINGS["stpke_default_db"])
-currencies      = m.find_one(sk, { "_id":"currencies" })
-base_currencies = m.find_one(sk, { "_id":"base_currencies" })
+currencies      = m.find_one(sc, { "_id":"currencies" })
+base_currencies = m.find_one(sc, { "_id":"base_currencies" })
 if not currencies or not base_currencies:
     init_base_settings()
-    currencies      = m.find_one(sk, { "_id":"currencies" })
-    base_currencies = m.find_one(sk, { "_id":"base_currencies" })
+    currencies      = m.find_one(sc, { "_id":"currencies" })
+    base_currencies = m.find_one(sc, { "_id":"base_currencies" })
 
 CURRENCIES = currencies["value"]
 BASE_CURRENCIES = base_currencies["value"]
