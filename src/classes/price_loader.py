@@ -1,6 +1,7 @@
 import ccxt
 from .callback import Callback
 import asyncio
+import datetime
 
 class PriceLoader(Callback):
 
@@ -48,6 +49,7 @@ class PriceLoader(Callback):
                 del tick[p]
         # NOTE: necessary for proper kafka callback topic mapping
         tick["type"] = "prices"
+        tick["timestamp"] = datetime.datetime.now().timestamp()
         return tick
 
     def _get_exchange(self, name):
