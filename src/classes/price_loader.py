@@ -12,7 +12,7 @@ class PriceLoader(Callback):
     sleep_time      = None
 
     def __init__(self, currencies, base_currencies, logger=None, sleep_time=60000):
-        super().__init__("KafkaCallback", logger=logger)
+        super().__init__("PriceLoader", logger=logger)
         self.currencies = currencies
         self.base_currencies = base_currencies
         self.sleep_time = int(sleep_time)/1000
