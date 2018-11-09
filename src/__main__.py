@@ -9,7 +9,7 @@ if not SETTINGS["stpke_kafka_url"]:
 
 #kafka = KafkaProducer()
 topic_mapping = {
-    "prices" : SETTINGS["stpke_prices_topic"],
+    SETTINGS["stpke_prices_type"] : SETTINGS["stpke_prices_topic"],
 }
 
 from .mongo import CURRENCIES, BASE_CURRENCIES
