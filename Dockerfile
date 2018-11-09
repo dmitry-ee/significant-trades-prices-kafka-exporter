@@ -10,7 +10,7 @@ COPY        docker-entrypoint.sh                ${APP_DIR}
 
 RUN         set -ex ;\
             apk add bash gcc musl-dev ;\
-            pip install -r requirements_base.txt ;\
+            pip install --no-cache-dir -r requirements_base.txt ;\
             chmod +x docker-entrypoint.sh ;\
             rm -rf /var/lib/apt/lists/* ;\
             rm -rf /var/cache/apk/*
