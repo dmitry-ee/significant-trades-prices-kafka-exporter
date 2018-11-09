@@ -1,4 +1,5 @@
 asyncio
 kafka-python
+websockets
 pymongo
 ccxt
